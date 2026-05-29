@@ -41,7 +41,7 @@ const Fulldetails = ({ item }) => {
         <div className='w-full h-screen fixed top-0 left-0 z-50 bg-black flex flex-col items-center justify-start md:justify-center overflow-y-auto' >
             
             {/* Top Close Bar: Scaled down padding slightly on mobile */}
-            <div className='close w-full absolute top-0 left-0 flex items-center justify-start px-4 py-2 md:py-3 bg-black z-50'>
+            <div className='close w-full absolute top-0 left-0 flex items-center justify-end px-4 py-2 md:py-3 bg-black z-50'>
                 <svg
                     onClick={() => setSelectedItem(null)}
                     className='cursor-pointer hover:opacity-75 transition-opacity w-10 h-10 md:w-[74px] md:h-[74px]' 
