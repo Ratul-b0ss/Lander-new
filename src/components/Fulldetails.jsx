@@ -1,4 +1,6 @@
+import { useGSAP } from '@gsap/react'
 import React from 'react'
+import gsap from 'gsap';
 
 const Details = ({ name, position, nationality, img, bio }) => {
     return (
@@ -36,9 +38,18 @@ const Details = ({ name, position, nationality, img, bio }) => {
 const Fulldetails = ({ item }) => {
     const [selectedItem, setSelectedItem] = item
 
+    useGSAP(() => {
+        if (!selectedItem) return
+
+        gsap.from(".fulld",{
+            opacity:"0",
+            height:"0%",
+            duration:0.5,
+        })
+    })
     return (
         /* Added overflow-y-auto so users can scroll through the content on smaller phones */
-        <div className='w-full h-screen fixed top-0 left-0 z-50 bg-black flex flex-col items-center justify-start md:justify-center overflow-y-auto' >
+        <div className=' fulld w-full h-screen fixed top-0 left-0 z-50 bg-black flex flex-col items-center justify-start md:justify-center overflow-y-auto' >
             
             {/* Top Close Bar: Scaled down padding slightly on mobile */}
             <div className='close w-full absolute top-0 left-0 flex items-center justify-end px-4 py-2 md:py-3 bg-black z-50'>
