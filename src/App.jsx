@@ -3,7 +3,8 @@ import CardSlider from './components/cardslider'
 import Fulldetails from './components/Fulldetails'
 import Header from './components/Header'
 import Footer from './components/Footer'
-
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap';
 
 const arr = [
 
@@ -39,17 +40,61 @@ const arr = [
 ]
 
 const App = () => {
+    const [show, setshow] = useState(false)
 	const [selectedItem, setSelectedItem] = useState(null)
 
-    console.log(selectedItem)
+    useGSAP(() => {
+        gsap.to(".welldiv",{
+            opacity:"1",
+            duration:0.5,
+            delay:1
+        })
+
+        gsap.from(".welltxt",{
+            y:"90%",
+            opacity:"0",
+            duration:2,
+            stagger:{
+                amount:0.2
+            }
+        })
+        gsap.to(".welldiv",{
+            opacity:"0",
+            duration:1,
+            delay:2,
+            onComplete:()=>{
+                setshow(true)
+            }
+        })
+
+    })
+
 
 	return (
-		<div >
-			<Header/>
-			<CardSlider item={[selectedItem,setSelectedItem]} arr={arr}/>
-            {selectedItem && <Fulldetails item={[selectedItem,setSelectedItem]} />}
-			<Footer/>
-		</div>
+
+        <>
+
+        {!show && (
+            <div className='welldiv w-full h-screen fixed top-0 left-0 z-50 bg-black flex items-center justify-center' >
+                <div className=' text-center flex itams-center justify-center gap-3'>
+                    <h1 className='welltxt text-4xl md:text-6xl font-bold text-white'>Welcome</h1>
+                    <h1 className='welltxt text-4xl md:text-6xl font-bold text-white'>to Our </h1>
+                    <h1 className='welltxt text-4xl md:text-6xl font-bold text-white'>Team</h1>
+                </div>
+            </div>
+        )}
+
+		{show && (
+			
+            <div >
+				<Header/>
+				<CardSlider item={[selectedItem,setSelectedItem]} arr={arr}/>
+				{selectedItem && <Fulldetails item={[selectedItem,setSelectedItem]} />}
+				<Footer/>
+			</div>
+    
+		)}
+        </>
 	)
 }
 
